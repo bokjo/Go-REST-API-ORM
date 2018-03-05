@@ -1,0 +1,10 @@
+
+dep init
+dep status
+dep ensure
+dep ensure -add github.com/foo/bar
+dep ensure -update
+
+Windows
+> choco install graphviz.portable
+> dep status -dot | dot -T png -o status.png; start status.png
