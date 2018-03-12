@@ -14,10 +14,7 @@ var err error
 func dbConnect() *gorm.DB {
 	// db, err := gorm.Open("postgres", "user=bstojchevski password=Password1 dbname=postgres sslmode=disable")
 	db, err := gorm.Open("sqlite3", "user.db")
-	if err != nil {
-		panic(fmt.Sprintf("Cannot connect to the database!\n ERROR: '%v'", err))
-	}
-
+	checkDbError(err)
 	return db
 }
 
@@ -31,4 +28,10 @@ func dbAutoMigrate() {
 	defer dbDisconnect(db)
 
 	db.AutoMigrate(&User{})
+}
+
+func checkDbError(err error) {
+	if err != nil {
+		panic(fmt.Sprintf("Cannot connect to the database!\n ERROR: '%v'", err))
+	}
 }
